@@ -1147,10 +1147,13 @@ export default {
           }
         } else if (hasHalfDayOnWeeklyPeriod) {
           // Show the correct wording in comparison to periodType of this.checkInPeriod equal to "nightly" / "weekly"
-          if (this.checkInPeriod.periodType !== "nightly") {
+          if (
+            this.checkInPeriod.periodType !== "nightly" &&
+            countDaysBetweenCheckInCurrentDay % 7 === 0
+          ) {
             this.customTooltip = `${countDaysBetweenCheckInCurrentDay /
               7} ${this.pluralize(this.minNightCount, "week")}`;
-          } else if (this.checkInPeriod.periodType === "nightly") {
+          } else {
             this.customTooltip = `${countDaysBetweenCheckInCurrentDay} ${
               countDaysBetweenCheckInCurrentDay !== 1
                 ? this.i18n.nights

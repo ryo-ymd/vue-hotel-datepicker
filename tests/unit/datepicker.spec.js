@@ -1826,5 +1826,96 @@ describe("Datepicker Component", () => {
         testingHoveringDate(27, 30, "2022-10", "2022-10-30");
       });
     });
+
+    describe("Tooltip return always a modulo 7 when periods is weekly", () => {
+      beforeEach(async () => {
+        wrapper = await mount(Datepicker, {
+          propsData: {
+            disableCheckoutOnCheckin: true,
+            alwaysVisible: true,
+            countOfDesktopMonth: 2,
+            firstDayOfWeek: 1,
+            minNights: 1,
+            disabledDates: [
+              "2022-12-17",
+              "2022-12-18",
+              "2022-12-19",
+              "2022-12-20",
+              "2022-12-21",
+              "2022-12-22",
+              "2022-12-23",
+              "2022-12-24",
+              "2022-12-25",
+              "2022-12-26",
+              "2022-12-27",
+              "2022-12-28",
+              "2022-12-29",
+              "2022-12-30",
+              "2022-12-31",
+              "2023-01-01",
+              "2023-01-02",
+              "2023-01-03",
+              "2023-01-04",
+              "2023-01-05",
+              "2023-01-06",
+              "2023-01-07",
+              "2023-01-08",
+              "2023-01-15",
+              "2023-01-16",
+              "2023-01-17",
+              "2023-01-18",
+              "2023-01-19"
+            ],
+            periodDates: [
+              {
+                endAt: "2022-12-19",
+                minimumDuration: 8,
+                periodType: "nightly",
+                startAt: "2022-12-11"
+              },
+              {
+                endAt: "2023-01-09",
+                minimumDuration: 7,
+                periodType: "nightly",
+                startAt: "2022-12-19"
+              },
+              {
+                endAt: "2023-06-25",
+                minimumDuration: 1,
+                periodType: "weekly_by_sunday",
+                startAt: "2023-01-15"
+              },
+              {
+                endAt: "2023-01-15",
+                minimumDuration: 6,
+                periodType: "nightly",
+                startAt: "2023-01-09"
+              }
+            ],
+            startDate: new Date("2023-01-01")
+          }
+        });
+
+        const checkInDay = wrapper.get('[data-testid="day-2023-01-10"]');
+
+        await checkInDay.trigger("click");
+      });
+
+      it("Should define checkInPeriod equal to nextPeriod.minimumDurationNights", () => {
+        expect(wrapper.vm.checkInPeriod.minimumDurationNights).toBe(7);
+      });
+
+      it("Should render correct text for tooltip", () => {
+        expect(wrapper.vm.customTooltip).toBe("1 week minimum.");
+      });
+
+      it("Should return a nightly count", async () => {
+        await wrapper
+          .get('[data-testid="daywrap-2023-01-15"]')
+          .trigger("mouseenter");
+
+        expect(wrapper.vm.customTooltip).toBe("5 Nights");
+      });
+    });
   });
 });
