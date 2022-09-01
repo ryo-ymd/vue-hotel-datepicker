@@ -427,6 +427,30 @@
         new Check In Date : {{ newCheckInDate }} <br />
         new Check Out Date : {{ newCheckOutDate }}
       </div>
+      <div class="box">
+        <h3>Calendar with bookings</h3>
+        <DatePicker
+          :alwaysVisible="true"
+          :bookings="bookings2"
+          clickOutsideElementId="clickOutsideElementId"
+          :disableCheckoutOnCheckin="true"
+          :disabledDates="[]"
+          :endingDateValue="
+            new Date(
+              'Wed May 10 2023 00:00:00 GMT+0200 (heure d’été d’Europe centrale)'
+            )
+          "
+          :firstDayOfWeek="1"
+          :format="dateFormat"
+          :checkIncheckOutHalfDay="true"
+          :hoveringTooltip="false"
+          :i18n="frFR"
+          :lastDateAvailable="lastDateAvailable"
+          :minNights="minNights"
+          :positionRight="true"
+          :showYear="true"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -686,6 +710,24 @@ export default {
           style: {
             backgroundColor: "#9DC1C9"
           }
+        }
+      ],
+      bookings2: [
+        {
+          id: "3928875",
+          triggerEvent: false,
+          checkInDate: "2022-09-10",
+          checkOutDate: "2022-09-17",
+          type: "contract",
+          style: { backgroundColor: "#D4A45F" }
+        },
+        {
+          id: "7270382",
+          triggerEvent: false,
+          checkInDate: "2022-09-17",
+          checkOutDate: "2022-09-24",
+          type: "contract",
+          style: { backgroundColor: "#D4A45F" }
         }
       ],
       newCheckInDate: null,

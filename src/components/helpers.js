@@ -15,7 +15,7 @@ const isBetweenDate = (fromDate, toDate, givenDate) => {
   const d2 = dayjs(toDate).utc(true);
   const d3 = dayjs(givenDate).utc(true);
 
-  return dayjs(d3).isBetween(d1, d2, "day");
+  return dayjs(d3).isBetween(d1, d2, "day", []);
 };
 
 const getDateDiff = (time1, time2, type) => {
