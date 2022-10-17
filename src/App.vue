@@ -528,16 +528,22 @@ export default {
       },
       periodDates2: [
         {
-          endAt: "2022-08-27",
-          minimumDuration: 5,
+          endAt: "2022-09-04",
+          minimumDuration: 1,
           periodType: "nightly",
-          startAt: "2022-10-29"
+          startAt: "2022-09-03"
         },
         {
-          endAt: "2022-10-29",
-          minimumDuration: 3,
+          endAt: "2023-02-04",
+          minimumDuration: 1,
           periodType: "nightly",
-          startAt: "2022-12-17"
+          startAt: "2023-02-02"
+        },
+        {
+          endAt: "2023-04-15",
+          minimumDuration: 1,
+          periodType: "weekly_by_saturday",
+          startAt: "2023-02-04"
         }
       ],
       periodDates: [
