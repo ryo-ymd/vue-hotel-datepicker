@@ -1392,10 +1392,11 @@ export default {
         };
 
         const getEnableNextDate = () => {
-          let enableNextDate = this.addDays(
-            this.checkIn,
-            this.dynamicNightCounts - 1
-          );
+          const dynamicNightCounts =
+            this.dynamicNightCounts === 1
+              ? this.dynamicNightCounts
+              : this.dynamicNightCounts - 1;
+          let enableNextDate = this.addDays(this.checkIn, dynamicNightCounts);
 
           if (
             this.nextPeriod?.periodType.includes("weekly") &&
