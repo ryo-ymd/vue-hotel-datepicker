@@ -181,10 +181,12 @@ export default {
     const lenghDifference = getDateDiff(d1.toDate(), d2.toDate(), "day");
     const arr = [];
 
-    for (let index = 0; index < lenghDifference + 1; index++) {
-      const day = d1.add(index, "day").toDate();
+    if (lenghDifference > 0) {
+      for (let index = 0; index < lenghDifference + 1; index++) {
+        const day = d1.add(index, "day").toDate();
 
-      arr.push(day);
+        arr.push(day);
+      }
     }
 
     return arr;
