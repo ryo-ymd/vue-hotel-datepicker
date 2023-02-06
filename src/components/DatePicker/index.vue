@@ -1323,6 +1323,7 @@ export default {
       this.$emit("clear-selection");
     },
     closeMobileDatepicker() {
+      this.$emit("close-mobile");
       this.hideDatepicker();
     },
     hideDatepicker() {
