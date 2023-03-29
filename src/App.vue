@@ -452,6 +452,45 @@
         />
       </div>
     </div>
+
+    <div class="box">
+      <h3>
+        Custom slot
+      </h3>
+      <DatePicker
+        ref="DatePicker"
+        clickOutsideElementId="clickOutsideElement"
+        :firstDayOfWeek="1"
+        :showYear="true"
+        :format="dateFormat"
+        :lastDateAvailable="lastDateAvailable"
+        :minNights="1"
+        :i18n="frFR"
+        :hoveringTooltip="true"
+        :disableCheckoutOnCheckin="true"
+        :periodDates="periodDates2"
+        :showInputCalendar="false"
+        @renderNextMonth="renderNextMonth"
+      >
+        <template #header-mobile="{ clearSelection, closeMobileDatepicker }">
+          <div>
+            slot header-mobile
+            <span @click="closeMobileDatepicker">icon 1</span>
+            <span @click="clearSelection">icon 2</span>
+          </div>
+        </template>
+
+        <template
+          v-if="screenSize === 'not-desktop'"
+          #content="{ customTooltipMessage }"
+        >
+          <div style="background-color: #C1C1C1; height: 100%">
+            slot content
+            {{ customTooltipMessage }}
+          </div>
+        </template>
+      </DatePicker>
+    </div>
   </div>
 </template>
 
@@ -738,7 +777,8 @@ export default {
       ],
       newCheckInDate: null,
       newCheckOutDate: null,
-      minNights: 3
+      minNights: 3,
+      screenSize: null
     };
   },
   computed: {
@@ -747,6 +787,13 @@ export default {
     },
     lastDateAvailable() {
       return this.addYears(new Date(), 2);
+    }
+  },
+  mounted() {
+    if (window.innerWidth >= 768) {
+      this.screenSize = "desktop";
+    } else {
+      this.screenSize = "not-desktop";
     }
   },
   methods: {
@@ -771,8 +818,8 @@ export default {
     periodSelected(event, checkIn, checkOut) {
       console.log("periodSelected", event, checkIn, checkOut);
     },
-    handleCheckIncheckOutHalfDay(checkIncheckOutHalfDay) {
-      console.log("handleCheckIncheckOutHalfDay", checkIncheckOutHalfDay);
+    handleCheckIncheckOutHalfDay() {
+      console.log("handleCheckIncheckOutHalfDay");
     },
     addYears(dt, n) {
       return new Date(dt.setFullYear(dt.getFullYear() + n));
