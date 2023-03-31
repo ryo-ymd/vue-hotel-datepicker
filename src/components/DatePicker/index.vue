@@ -65,7 +65,14 @@
       ]"
     >
       <div v-if="isOpen && isMobile">
+        <slot
+          name="header-mobile"
+          :clearSelection="clearSelection"
+          :closeMobileDatepicker="closeMobileDatepicker"
+        />
+
         <div
+          v-if="showInputCalendar"
           @click="toggleDatepicker"
           :class="[
             'datepicker__dummy-wrapper datepicker__dummy-wrapper--no-border',
@@ -89,12 +96,6 @@
             :is-open="isOpen"
             :single-day-selection="singleDaySelection"
           />
-        </div>
-
-        <div class="datepicker__tooltip--mobile" v-if="hoveringTooltip">
-          <template v-if="customTooltipMessage">
-            {{ cleanString(customTooltipMessage) }}
-          </template>
         </div>
 
         <DatePickerWeekRow
@@ -220,7 +221,18 @@
           </button>
         </div>
 
-        <slot name="content" />
+        <slot
+          name="content"
+          :customTooltipMessage="
+            customTooltipMessage && cleanString(customTooltipMessage)
+          "
+        >
+          <div class="datepicker__tooltip--mobile" v-if="hoveringTooltip">
+            <template v-if="customTooltipMessage">
+              {{ cleanString(customTooltipMessage) }}
+            </template>
+          </div>
+        </slot>
       </div>
     </div>
   </div>
@@ -380,6 +392,10 @@ export default {
     showSingleMonth: {
       type: Boolean,
       default: false
+    },
+    showInputCalendar: {
+      type: Boolean,
+      default: true
     },
     showYear: {
       type: Boolean,
