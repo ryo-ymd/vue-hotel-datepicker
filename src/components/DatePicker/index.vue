@@ -223,6 +223,8 @@
 
         <slot
           name="content"
+          :clearSelection="clearSelection"
+          :closeMobileDatepicker="closeMobileDatepicker"
           :customTooltipMessage="
             customTooltipMessage && cleanString(customTooltipMessage)
           "
