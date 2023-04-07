@@ -216,15 +216,13 @@ export default {
   isDateBeforeOrEqual(time1, time2) {
     return new Date(time1) <= new Date(time2);
   },
-  test(day1, day2) {
-    const date1 = fecha.format(new Date(day1), "YYYY-MM-DD");
-    const date2 = fecha.format(new Date(day2), "YYYY-MM-DD");
-
-    return date1 === date2;
-  },
   compareDay(day1, day2) {
-    const date1 = fecha.format(new Date(day1), "YYYY-MM-DD");
-    const date2 = fecha.format(new Date(day2), "YYYY-MM-DD");
+    const date1 = dayjs(day1)
+      .utc(true)
+      .format("YYYY-MM-DD");
+    const date2 = dayjs(day2)
+      .utc(true)
+      .format("YYYY-MM-DD");
 
     if (date1 > date2) {
       return 1;

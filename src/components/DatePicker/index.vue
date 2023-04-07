@@ -1800,9 +1800,21 @@ export default {
         sortedDates = sortedDates.filter(date => !halfDays.includes(date));
       }
 
-      sortedDates = sortedDates.map(date => new Date(date));
+      sortedDates.sort((a, b) => {
+        const aa = a
+          .split("/")
+          .reverse()
+          .join();
+        const bb = b
+          .split("/")
+          .reverse()
+          .join();
 
-      this.sortedDisabledDates = sortedDates.sort((a, b) => a - b);
+        // eslint-disable-next-line no-nested-ternary
+        return aa < bb ? -1 : aa > bb ? 1 : 0;
+      });
+      this.sortedDisabledDates = sortedDates;
+
       this.checkIncheckOutHalfDay = checkIncheckOutHalfDay;
       this.$emit("handleCheckIncheckOutHalfDay", this.checkIncheckOutHalfDay);
     }
