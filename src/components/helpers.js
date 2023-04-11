@@ -149,7 +149,7 @@ export default {
   validateDateBetweenTwoDates(fromDate, toDate, givenDate) {
     return isBetweenDate(fromDate, toDate, givenDate);
   },
-  validateDateBetweenDate(fromDate, givenDate) {
+  isDateIsBeforeOrEqual(fromDate, givenDate) {
     const getvalidDate = d => {
       return new Date(d);
     };

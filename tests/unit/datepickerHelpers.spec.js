@@ -89,4 +89,96 @@ describe("Datepicker Helpers", () => {
       );
     });
   });
+
+  describe("validateDateBetweenTwoDates", () => {
+    it("should return true", () => {
+      expect(
+        wrapper.vm.validateDateBetweenTwoDates(
+          "2020-05-10",
+          "2020-05-28",
+          "2020-05-15"
+        )
+      ).toEqual(true);
+    });
+
+    it("should return false", () => {
+      expect(
+        wrapper.vm.validateDateBetweenTwoDates(
+          "2020-05-10",
+          "2020-05-28",
+          "2020-05-29"
+        )
+      ).toEqual(false);
+    });
+  });
+
+  describe("isDateIsBeforeOrEqual", () => {
+    it("should return true = before", () => {
+      expect(
+        wrapper.vm.isDateIsBeforeOrEqual("2020-01-10", "2020-01-05")
+      ).toEqual(true);
+    });
+
+    it("should return true = equal", () => {
+      expect(
+        wrapper.vm.isDateIsBeforeOrEqual("2020-01-05", "2020-01-05")
+      ).toEqual(true);
+    });
+
+    it("should return false = after", () => {
+      expect(
+        wrapper.vm.isDateIsBeforeOrEqual("2020-01-05", "2020-01-10")
+      ).toEqual(false);
+    });
+  });
+
+  describe("getMonthDiff", () => {
+    it("should return 1", () => {
+      expect(wrapper.vm.getMonthDiff("2020-01-05", "2020-02-10")).toEqual(1);
+    });
+
+    it("should return 10", () => {
+      expect(wrapper.vm.getMonthDiff("2020-01-05", "2020-11-10")).toEqual(10);
+    });
+  });
+
+  describe("isDateAfter", () => {
+    it("should return true - after", () => {
+      expect(wrapper.vm.isDateAfter("2022-01-10", "2022-01-11")).toEqual(true);
+    });
+
+    it("should return false - !after", () => {
+      expect(wrapper.vm.isDateAfter("2022-01-11", "2022-01-10")).toEqual(false);
+    });
+  });
+
+  describe("isDateBefore", () => {
+    it("should return true - before", () => {
+      expect(wrapper.vm.isDateAfter("2022-01-11", "2022-01-10")).toEqual(false);
+    });
+
+    it("should return false - !before", () => {
+      expect(wrapper.vm.isDateAfter("2022-01-10", "2022-01-11")).toEqual(true);
+    });
+  });
+
+  describe("isDateBeforeOrEqual", () => {
+    it("should return true - before", () => {
+      expect(
+        wrapper.vm.isDateBeforeOrEqual("2020-01-10", "2020-01-10")
+      ).toEqual(true);
+    });
+
+    it("should return true", () => {
+      expect(
+        wrapper.vm.isDateBeforeOrEqual("2020-01-10", "2020-01-10")
+      ).toEqual(true);
+    });
+
+    it("should return false", () => {
+      expect(
+        wrapper.vm.isDateBeforeOrEqual("2022-01-10", "2022-01-11")
+      ).toEqual(true);
+    });
+  });
 });

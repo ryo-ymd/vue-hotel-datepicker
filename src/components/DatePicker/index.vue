@@ -108,14 +108,14 @@
         <div class="datepicker__header" v-if="isDesktop || alwaysVisible">
           <button
             type="button"
-            class="datepicker__month-button datepicker__month-button--prev "
+            class="datepicker__month-button datepicker__month-button--prev"
             @click="renderPreviousMonth"
             :tabindex="isOpen ? 0 : -1"
             :disabled="activeMonthIndex === 0"
           />
           <button
             type="button"
-            class="datepicker__month-button datepicker__month-button--next "
+            class="datepicker__month-button datepicker__month-button--next"
             @click="renderNextMonth"
             :disabled="isPreventedMaxMonth"
             :tabindex="isOpen ? 0 : -1"
@@ -1048,10 +1048,7 @@ export default {
         const nextDateFormated = this.dateFormater(this.addDays(date, 1));
         const nextBooking = this.sortBookings.find(
           booking =>
-            this.validateDateBetweenDate(
-              booking.checkInDate,
-              nextDateFormated
-            ) ||
+            this.isDateIsBeforeOrEqual(booking.checkInDate, nextDateFormated) ||
             this.validateDateBetweenTwoDates(
               booking.checkInDate,
               booking.checkOutDate,
@@ -1199,7 +1196,10 @@ export default {
       this.showCustomTooltip = true;
       this.customTooltip = this.completeTrad(
         this.i18n.tooltip.minimumRequiredPeriod,
-        { minNightInPeriod: this.minNightCount / 7, night }
+        {
+          minNightInPeriod: this.minNightCount / 7,
+          night
+        }
       );
     },
     showTooltipNightlyOnHover(date) {
@@ -1232,7 +1232,10 @@ export default {
       this.showCustomTooltip = true;
       this.customTooltip = this.completeTrad(
         this.i18n.tooltip.minimumRequiredPeriod,
-        { minNightInPeriod, night }
+        {
+          minNightInPeriod,
+          night
+        }
       );
     },
     createHalfDayTooltip(date) {
