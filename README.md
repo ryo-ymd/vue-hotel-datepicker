@@ -1,8 +1,8 @@
-# Release 1.2.5
+# Release 1.3.0
 
 ### Breacking change on latest version
 
-https://github.com/joffreyBerrier/vue-hotel-datepicker/releases/tag/1.2.5
+https://github.com/joffreyBerrier/vue-hotel-datepicker/releases/tag/1.3.0
 
 # vue-hotel-datepicker@2
 
@@ -505,6 +505,13 @@ Number of month you want to display on desktop
 - Default: `12`
 
 Number of month you want to have already created, the next month `countOfTotalMonthByDefault` + 1 will be created directly after you click on pagination button
+
+## Timezone
+
+- Type : `String`
+- Default: `Europe/Paris`
+
+Define the timezone of the Calendar for manage periods and disabled dates in the correct timezone
 
 ## API
 
