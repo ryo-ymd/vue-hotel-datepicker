@@ -423,6 +423,10 @@ export default {
     },
     value: {
       type: String
+    },
+    timezone: {
+      type: String,
+      default: "Europe/Paris"
     }
   },
   data() {
@@ -676,6 +680,7 @@ export default {
     };
   },
   mounted() {
+    window.vueDatePicker = { timezone: this.timezone };
     this.handleWindowResize();
     this.constructMonth();
 

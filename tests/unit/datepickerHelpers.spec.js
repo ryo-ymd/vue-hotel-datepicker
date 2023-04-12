@@ -17,19 +17,23 @@ describe("Datepicker Helpers", () => {
   describe("nextDateByDayOfWeek", () => {
     it("should return the next given day of the week when comparing a date to a date", () => {
       expect(
-        new Date(wrapper.vm.nextDateByDayOfWeek("Saturday", "10-11-2017"))
-      ).toEqual(new Date("10-14-2017"));
+        wrapper.vm.formatTransformDay(
+          wrapper.vm.nextDateByDayOfWeek("Saturday", "2023-08-01")
+        )
+      ).toEqual(wrapper.vm.formatTransformDay("2023-08-05"));
     });
   });
 
   describe("nextDateByDayOfWeekArray", () => {
     it("should return the next date when comparing to an array days of the week", () => {
       expect(
-        wrapper.vm.nextDateByDayOfWeekArray(
-          ["Saturday", "Tuesday"],
-          "11-08-2017"
+        wrapper.vm.formatTransformDay(
+          wrapper.vm.nextDateByDayOfWeekArray(
+            ["Saturday", "Tuesday"],
+            "2017-11-08"
+          )
         )
-      ).toEqual(new Date("11-11-2017"));
+      ).toEqual(wrapper.vm.formatTransformDay("2017-11-11"));
     });
   });
 
@@ -58,19 +62,17 @@ describe("Datepicker Helpers", () => {
     });
   });
 
-  describe("getFirstDaySunday", () => {
-    it("should return the first sunday of a given month", () => {
-      expect(wrapper.vm.getFirstDay(new Date("10-10-2017"), 0)).toEqual(
-        new Date("10-01-2017")
-      );
+  describe("getFirstDay", () => {
+    describe("getFirstDaySunday", () => {
+      it("should return the first sunday of a given month", () => {
+        expect(wrapper.vm.getFirstDay("2023-06-10", 0)).toEqual("2023-05-28");
+      });
     });
-  });
 
-  describe("getFirstDayMonday", () => {
-    it("should return the first monday of a given month", () => {
-      expect(wrapper.vm.getFirstDay(new Date("10-10-2017"), 1)).toEqual(
-        new Date("09-25-2017")
-      );
+    describe("getFirstDayMonday", () => {
+      it("should return the first monday of a given month", () => {
+        expect(wrapper.vm.getFirstDay("2023-06-10", 1)).toEqual("2023-05-29");
+      });
     });
   });
 
@@ -84,9 +86,9 @@ describe("Datepicker Helpers", () => {
 
   describe("getNextMonth", () => {
     it("should return the next month of a given date", () => {
-      expect(wrapper.vm.getNextMonth(new Date("12-10-2017"))).toEqual(
-        new Date("01-01-2018")
-      );
+      expect(
+        wrapper.vm.formatTransformDay(wrapper.vm.getNextMonth("2017-12-10"))
+      ).toEqual(wrapper.vm.formatTransformDay("2018-01-01"));
     });
   });
 
@@ -165,7 +167,7 @@ describe("Datepicker Helpers", () => {
   describe("isDateBeforeOrEqual", () => {
     it("should return true - before", () => {
       expect(
-        wrapper.vm.isDateBeforeOrEqual("2020-01-10", "2020-01-10")
+        wrapper.vm.isDateBeforeOrEqual("2020-01-10", "2020-01-15")
       ).toEqual(true);
     });
 
@@ -177,8 +179,8 @@ describe("Datepicker Helpers", () => {
 
     it("should return false", () => {
       expect(
-        wrapper.vm.isDateBeforeOrEqual("2022-01-10", "2022-01-11")
-      ).toEqual(true);
+        wrapper.vm.isDateBeforeOrEqual("2022-01-11", "2022-01-10")
+      ).toEqual(false);
     });
   });
 });
