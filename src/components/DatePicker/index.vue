@@ -1010,13 +1010,22 @@ export default {
         return;
       }
 
-      let nextDisabledDate =
-        (this.maxNights ? this.addDays(date, this.maxNights) : null) ||
-        this.getNextCheckInCheckOutHalfDayDate(date) ||
-        this.getNextDate(this.sortedDisabledDates, date) ||
-        this.nextDateByDayOfWeekArray(this.disabledDaysOfWeek, date) ||
-        this.nextBookingDate(date) ||
-        Infinity;
+      let nextDisabledDate = this.minDay(...[
+        (this.maxNights ? this.addDays(date, this.maxNights) : null),
+        this.getNextCheckInCheckOutHalfDayDate(date),
+        this.getNextDate(this.sortedDisabledDates, date),
+        this.nextDateByDayOfWeekArray(this.disabledDaysOfWeek, date),
+        this.nextBookingDate(date),
+        Infinity
+      ])
+
+      // let nextDisabledDate =
+      //   (this.maxNights ? this.addDays(date, this.maxNights) : null) ||
+      //   this.getNextCheckInCheckOutHalfDayDate(date) ||
+      //   this.getNextDate(this.sortedDisabledDates, date) ||
+      //   this.nextDateByDayOfWeekArray(this.disabledDaysOfWeek, date) ||
+      //   this.nextBookingDate(date) ||
+      //   Infinity;
 
       this.dynamicNightCounts = null;
 
