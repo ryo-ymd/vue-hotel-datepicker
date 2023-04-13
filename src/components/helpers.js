@@ -14,6 +14,8 @@ import { default as isSameOrAfter } from "dayjs/plugin/isSameOrAfter";
 import { default as isSameOrBefore } from "dayjs/plugin/isSameOrBefore";
 // eslint-disable-next-line import/no-named-default
 import { default as weekday } from "dayjs/plugin/weekday";
+// eslint-disable-next-line import/no-named-default
+import { default as minMax } from "dayjs/plugin/minMax";
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
@@ -21,6 +23,7 @@ dayjs.extend(isSameOrBefore);
 dayjs.extend(timezone);
 dayjs.extend(utc);
 dayjs.extend(weekday);
+dayjs.extend(minMax);
 
 export const transformDay = d => {
   const getTimezone = window?.vueDatePicker?.timezone || "Europe/Paris";
@@ -256,5 +259,8 @@ export default {
     }
 
     return null;
+  },
+  minDay(days) {
+    return dayjs.min(days);
   }
 };
