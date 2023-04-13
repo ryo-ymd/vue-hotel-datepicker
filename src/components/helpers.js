@@ -14,6 +14,7 @@ import { default as isSameOrAfter } from "dayjs/plugin/isSameOrAfter";
 import { default as isSameOrBefore } from "dayjs/plugin/isSameOrBefore";
 // eslint-disable-next-line import/no-named-default
 import { default as weekday } from "dayjs/plugin/weekday";
+// eslint-disable-next-line import/no-named-default
 import { default as minMax } from "dayjs/plugin/minMax";
 
 dayjs.extend(isBetween);
@@ -259,7 +260,7 @@ export default {
 
     return null;
   },
-  minDay() {
-    return dayjs.min(arguments);
+  minDay(days) {
+    return dayjs.min(days);
   }
 };

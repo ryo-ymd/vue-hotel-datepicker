@@ -265,7 +265,7 @@ const defaulti18n = {
     "September",
     "October",
     "November",
-    "December"
+    "December",
   ],
   tooltip: {
     halfDayCheckIn: "Available CheckIn",
@@ -273,10 +273,10 @@ const defaulti18n = {
     saturdayToSaturday: "Only Saturday to Saturday",
     sundayToSunday: "Only Sunday to Sunday",
     mondayToMonday: "Only Monday to Monday",
-    minimumRequiredPeriod: "%{minNightInPeriod} %{night} minimum."
+    minimumRequiredPeriod: "%{minNightInPeriod} %{night} minimum.",
   },
   week: "week",
-  weeks: "weeks"
+  weeks: "weeks",
 };
 
 export default {
@@ -284,150 +284,150 @@ export default {
   components: {
     DateInput,
     DatePickerWeekRow,
-    Day
+    Day,
   },
   props: {
     alwaysVisible: {
       type: Boolean,
-      default: false
+      default: false,
     },
     bookings: {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     clickOutsideElementId: {
       type: String,
-      default: ""
+      default: "",
     },
     closeDatepickerOnClickOutside: {
       type: Boolean,
-      default: true
+      default: true,
     },
     countOfDesktopMonth: {
       type: Number,
-      default: 2
+      default: 2,
     },
     countOfMobileMonth: {
       type: Number,
-      default: 8
+      default: 8,
     },
     countOfTotalMonthByDefault: {
       type: Number,
-      default: 12
+      default: 12,
     },
     disabledDates: {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     disabledDaysOfWeek: {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     displayClearButton: {
       type: Boolean,
-      default: true
+      default: true,
     },
     disableCheckoutOnCheckin: {
       type: Boolean,
-      default: false
+      default: false,
     },
     enableCheckout: {
       type: Boolean,
-      default: false
+      default: false,
     },
     endDate: {
       type: [Date, String, Number],
-      default: Infinity
+      default: Infinity,
     },
     endingDateValue: {
       type: Date,
-      default: null
+      default: null,
     },
     firstDayOfWeek: {
       type: Number,
-      default: 0
+      default: 0,
     },
     format: {
       type: String,
-      default: "YYYY-MM-DD"
+      default: "YYYY-MM-DD",
     },
     halfDay: {
       type: Boolean,
-      default: true
+      default: true,
     },
     hoveringTooltip: {
       default: true,
-      type: [Boolean, Function]
+      type: [Boolean, Function],
     },
     i18n: {
       type: Object,
-      default: () => defaulti18n
+      default: () => defaulti18n,
     },
     lastDateAvailable: {
       type: [Number, Date],
-      default: Infinity
+      default: Infinity,
     },
     maxNights: {
       type: Number,
-      default: null
+      default: null,
     },
     minNights: {
       type: Number,
-      default: 1
+      default: 1,
     },
     periodDates: {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     positionRight: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showSingleMonth: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showInputCalendar: {
       type: Boolean,
-      default: true
+      default: true,
     },
     showYear: {
       type: Boolean,
-      default: false
+      default: false,
     },
     singleDaySelection: {
       type: Boolean,
-      default: false
+      default: false,
     },
     startDate: {
       type: [Date, String],
       default() {
         return new Date();
-      }
+      },
     },
     startingDateValue: {
       type: Date,
-      default: null
+      default: null,
     },
     tooltipMessage: {
       type: String,
-      default: null
+      default: null,
     },
     value: {
-      type: String
+      type: String,
     },
     timezone: {
       type: String,
-      default: "Europe/Paris"
-    }
+      default: "Europe/Paris",
+    },
   },
   data() {
     return {
@@ -453,7 +453,7 @@ export default {
       screenSize: null,
       show: true,
       showCustomTooltip: false,
-      sortedDisabledDates: null
+      sortedDisabledDates: null,
     };
   },
   computed: {
@@ -486,14 +486,14 @@ export default {
     },
     duplicateBookingDates() {
       return this.baseHalfDayDates.filter(
-        (newArr => date => newArr.has(date) || !newArr.add(date))(new Set())
+        (newArr => date => newArr.has(date) || !newArr.add(date))(new Set()),
       );
     },
     baseHalfDayDates() {
       if (this.sortBookings.length > 0) {
         const bookings = this.sortBookings.map(x => [
           x.checkInDate,
-          x.checkOutDate
+          x.checkOutDate,
         ]);
 
         return bookings.reduce((a, b) => {
@@ -567,7 +567,7 @@ export default {
 
             return {
               ...period,
-              minimumDurationNights
+              minimumDurationNights,
             };
           });
       }
@@ -577,7 +577,7 @@ export default {
     isPreventedMaxMonth() {
       const lastIndexMonthAvailable = this.getMonthDiff(
         this.startDate,
-        this.lastDateAvailable
+        this.lastDateAvailable,
       );
 
       if (this.isDesktop) {
@@ -594,9 +594,9 @@ export default {
     },
     showClearSelectionButton() {
       return Boolean(
-        (this.checkIn || this.checkOut) && this.displayClearButton
+        (this.checkIn || this.checkOut) && this.displayClearButton,
       );
-    }
+    },
   },
   watch: {
     bookings() {
@@ -621,7 +621,7 @@ export default {
 
               if (currentSelectionIndex > 1) {
                 const currentMonth = document.querySelectorAll(
-                  `div[data-key="${currentSelectionIndex}"]`
+                  `div[data-key="${currentSelectionIndex}"]`,
                 )[0];
 
                 if (currentMonth)
@@ -648,7 +648,7 @@ export default {
       }
 
       this.$emit("check-out-changed", newDate);
-    }
+    },
   },
   created() {
     if (
@@ -656,7 +656,7 @@ export default {
       this.startDate &&
       this.isDateBefore(
         this.dateFormater(this.checkIn),
-        this.dateFormater(this.startDate)
+        this.dateFormater(this.startDate),
       )
     ) {
       this.clearSelection();
@@ -674,9 +674,9 @@ export default {
           D +
           ["th", "st", "nd", "rd"][
             D % 10 > 3 ? 0 : ((D - (D % 10) !== 10) * D) % 10
-          ]
+            ]
         );
-      }
+      },
     };
   },
   mounted() {
@@ -714,7 +714,7 @@ export default {
       const startDate = new Date(this.startDate);
       const diffMonthBetweenStarDateAndCheckOut = this.getMonthDiff(
         this.startDate,
-        this.checkOut
+        this.checkOut,
       );
       const countOfMonth = this.isDesktop
         ? this.countOfDesktopMonth
@@ -732,19 +732,19 @@ export default {
         // Create each month to nextMonthStartDate to checkOut date
         this.renderMultipleMonth(
           this.startDate,
-          diffMonthBetweenStarDateAndCheckOut
+          diffMonthBetweenStarDateAndCheckOut,
         );
         const activeIndex = this.isDesktop ? 1 : this.countOfMobileMonth - 1;
 
         // Set the activeMonthIndex depend to device
         this.activeMonthIndex = Math.abs(
-          diffMonthBetweenStarDateAndCheckOut - activeIndex
+          diffMonthBetweenStarDateAndCheckOut - activeIndex,
         );
       } else {
         // Create each month depending to countOfTotalMonthByDefault
         this.renderMultipleMonth(
           this.startDate,
-          this.countOfTotalMonthByDefault - 1
+          this.countOfTotalMonthByDefault - 1,
         );
       }
     },
@@ -781,7 +781,7 @@ export default {
       const firstDay = this.getFirstDay(date, this.firstDayOfWeek);
       const month = {
         monthName: this.getMonthName(firstDayOfMonth),
-        days: []
+        days: [],
       };
 
       for (let i = 0; i < 42; i++) {
@@ -789,7 +789,7 @@ export default {
 
         month.days.push({
           date: day,
-          belongsToThisMonth: day.getMonth() === date.getMonth()
+          belongsToThisMonth: day.getMonth() === date.getMonth(),
         });
       }
 
@@ -804,7 +804,7 @@ export default {
         const firstDay = this.getFirstDay(currentDate, this.firstDayOfWeek);
         const month = {
           monthName: this.getMonthName(firstDayOfMonth),
-          days: []
+          days: [],
         };
 
         for (let i = 0; i < 42; i++) {
@@ -812,7 +812,7 @@ export default {
 
           month.days.push({
             date: day,
-            belongsToThisMonth: day.getMonth() === currentDate.getMonth()
+            belongsToThisMonth: day.getMonth() === currentDate.getMonth(),
           });
         }
 
@@ -915,14 +915,14 @@ export default {
             periodType: "nightly",
             minimumDuration: this.minNightCount,
             startAt: this.checkIn,
-            endAt: this.addDays(this.checkIn, this.minNightCount)
+            endAt: this.addDays(this.checkIn, this.minNightCount),
           };
         } else {
           this.hoveringPeriod = {
             periodType: "nightly",
             minimumDuration: this.minNightCount,
             startAt: this.checkIn,
-            endAt: this.addDays(this.checkIn, this.minNightCount)
+            endAt: this.addDays(this.checkIn, this.minNightCount),
           };
         }
       } else if (this.minNightCount > 0) {
@@ -930,7 +930,7 @@ export default {
           periodType: "nightly",
           minimumDuration: this.minNightCount,
           startAt: this.checkIn,
-          endAt: this.addDays(this.checkIn, this.minNightCount)
+          endAt: this.addDays(this.checkIn, this.minNightCount),
         };
       }
     },
@@ -977,11 +977,11 @@ export default {
     getNextCheckInCheckOutHalfDayDate(date) {
       if (this.halfDay && Object.keys(this.checkIncheckOutHalfDay).length > 0) {
         const checkIncheckOutHalfDayDates = Object.keys(
-          this.checkIncheckOutHalfDay
+          this.checkIncheckOutHalfDay,
         );
         const nextDateDisabled = this.getNextDate(
           checkIncheckOutHalfDayDates,
-          date
+          date,
         );
         const nextDayOfDate = this.addDays(nextDateDisabled, 1);
         const formatNextDayOfDate = this.dateFormater(nextDayOfDate);
@@ -1010,14 +1010,14 @@ export default {
         return;
       }
 
-      let nextDisabledDate = this.minDay(...[
-        (this.maxNights ? this.addDays(date, this.maxNights) : null),
+      let nextDisabledDate = this.minDay([
+        this.maxNights ? this.addDays(date, this.maxNights) : Infinity,
         this.getNextCheckInCheckOutHalfDayDate(date),
         this.getNextDate(this.sortedDisabledDates, date),
         this.nextDateByDayOfWeekArray(this.disabledDaysOfWeek, date),
         this.nextBookingDate(date),
         Infinity
-      ])
+      ]);
 
       // let nextDisabledDate =
       //   (this.maxNights ? this.addDays(date, this.maxNights) : null) ||
@@ -1066,8 +1066,8 @@ export default {
             this.validateDateBetweenTwoDates(
               booking.checkInDate,
               booking.checkOutDate,
-              nextDateFormated
-            )
+              nextDateFormated,
+            ),
         );
 
         closest = nextBooking ? nextBooking.checkInDate : Infinity;
@@ -1101,7 +1101,7 @@ export default {
         this.$set(
           this.checkInPeriod,
           "minimumDurationNights",
-          this.minNightCount
+          this.minNightCount,
         );
         this.showTooltipNightlyOnClick();
       }
@@ -1109,7 +1109,7 @@ export default {
     showTooltipWeeklyOnHover(date, periodDayType, text) {
       const countDaysBetweenCheckInCurrentDay = this.countDays(
         this.checkIn,
-        date
+        date,
       );
       const notOnPeriodDayType = date.getDay() !== periodDayType;
       const isCheckInCheckOut = this.checkIn && this.checkOut;
@@ -1118,19 +1118,19 @@ export default {
       const isNotBetweenCheckInAndCheckOut = !this.validateDateBetweenTwoDates(
         this.checkIn,
         this.checkOut,
-        date
+        date,
       );
       const notAllowDaysBetweenCheckInAndNextValidDate =
         this.hoveringPeriod.nextValidDate &&
         this.validateDateBetweenTwoDates(
           this.checkIn,
           this.hoveringPeriod.nextValidDate,
-          this.hoveringDate
+          this.hoveringDate,
         ) &&
         this.dateFormater(this.checkIn) !==
-          this.dateFormater(this.hoveringDate) &&
+        this.dateFormater(this.hoveringDate) &&
         this.dateFormater(this.hoveringPeriod.nextValidDate) !==
-          this.dateFormater(this.hoveringDate);
+        this.dateFormater(this.hoveringDate);
       const hasHalfDayOnWeeklyPeriod =
         Object.keys(this.checkIncheckOutHalfDay).length > 0 &&
         this.checkIncheckOutHalfDay[this.dateFormater(date)] &&
@@ -1171,7 +1171,7 @@ export default {
             this.showCustomTooltip = true;
             this.customTooltip = this.completeTrad(
               this.i18n.tooltip.minimumRequiredPeriod,
-              { minNightInPeriod: this.minNightCount / 7, night }
+              { minNightInPeriod: this.minNightCount / 7, night },
             );
           }
         } else if (hasHalfDayOnWeeklyPeriod) {
@@ -1181,7 +1181,7 @@ export default {
             countDaysBetweenCheckInCurrentDay % 7 === 0
           ) {
             this.customTooltip = `${countDaysBetweenCheckInCurrentDay /
-              7} ${this.pluralize(this.minNightCount, "week")}`;
+            7} ${this.pluralize(this.minNightCount, "week")}`;
           } else {
             this.customTooltip = `${countDaysBetweenCheckInCurrentDay} ${
               countDaysBetweenCheckInCurrentDay !== 1
@@ -1212,8 +1212,8 @@ export default {
         this.i18n.tooltip.minimumRequiredPeriod,
         {
           minNightInPeriod: this.minNightCount / 7,
-          night
-        }
+          night,
+        },
       );
     },
     showTooltipNightlyOnHover(date) {
@@ -1230,7 +1230,7 @@ export default {
           this.showCustomTooltip = true;
           this.customTooltip = this.completeTrad(
             this.i18n.tooltip.minimumRequiredPeriod,
-            { minNightInPeriod, night }
+            { minNightInPeriod, night },
           );
         } else {
           this.customTooltip = `${countOfDays} ${night}`;
@@ -1248,8 +1248,8 @@ export default {
         this.i18n.tooltip.minimumRequiredPeriod,
         {
           minNightInPeriod,
-          night
-        }
+          night,
+        },
       );
     },
     createHalfDayTooltip(date) {
@@ -1260,7 +1260,7 @@ export default {
       if (this.checkIn) {
         nextBookableDate = this.addDays(
           this.checkIn,
-          this.checkInPeriod.minimumDuration
+          this.checkInPeriod.minimumDuration,
         );
       }
 
@@ -1298,7 +1298,7 @@ export default {
 
         if (ignoredOutsideElement) {
           isIgnoredOutsideElementClicked = ignoredOutsideElement.contains(
-            event.target
+            event.target,
           );
         }
 
@@ -1406,7 +1406,7 @@ export default {
       if (this.checkIn && this.sortedPeriodDates) {
         const nextPeriodIsPriority = (
           currentPeriod = {},
-          minimumDurationNights
+          minimumDurationNights,
         ) => {
           if (this.nextPeriod?.minimumDurationNights) {
             // If NextPeriod is a weekly period
@@ -1448,7 +1448,7 @@ export default {
 
             enableNextDate = this.substractDays(
               this.getNextDay(enableNextDate, constraintPeriod),
-              1
+              1,
             );
           }
 
@@ -1461,7 +1461,7 @@ export default {
           let nextPeriodDisabledDates = [];
           const newDisablesDates = this.getDaysArray(
             startDateCheckin,
-            enableNextDate
+            enableNextDate,
           ).map(d => this.dateFormater(d));
 
           this.nextPeriodDisableDates.push(...newDisablesDates);
@@ -1470,7 +1470,7 @@ export default {
           if (this.nextPeriod?.periodType.includes("weekly")) {
             let nextPeriodEnableDay = this.addDays(
               this.checkIn,
-              this.nextPeriod.minimumDurationNights
+              this.nextPeriod.minimumDurationNights,
             );
             // weekly by sunday
             let constraintPeriod = 0;
@@ -1483,12 +1483,12 @@ export default {
             if (nextPeriodEnableDay.getDay() !== constraintPeriod) {
               nextPeriodEnableDay = this.getNextDay(
                 nextPeriodEnableDay,
-                constraintPeriod
+                constraintPeriod,
               );
 
               nextPeriodDisabledDates = this.getDaysArray(
                 this.addDays(this.nextPeriod.startAt, 1),
-                this.substractDays(nextPeriodEnableDay, 1)
+                this.substractDays(nextPeriodEnableDay, 1),
               ).map(d => this.dateFormater(d));
             }
           }
@@ -1496,13 +1496,13 @@ export default {
           // Filled nextPeriodDisabledDates
           this.nextPeriodDisableDates.push(
             ...newDisablesDates,
-            ...nextPeriodDisabledDates
+            ...nextPeriodDisabledDates,
           );
           this.nextPeriodDisableDates = [
-            ...new Set(this.nextPeriodDisableDates)
+            ...new Set(this.nextPeriodDisableDates),
           ];
           this.nextPeriodDisableDates = this.sortedDates(
-            this.nextPeriodDisableDates
+            this.nextPeriodDisableDates,
           );
         };
 
@@ -1517,7 +1517,7 @@ export default {
                 this.validateDateBetweenTwoDates(
                   d.startAt,
                   d.endAt,
-                  currentDate
+                  currentDate,
                 ))
             ) {
               day = d;
@@ -1532,7 +1532,7 @@ export default {
         // If currentPeriod
         if (currentPeriod) {
           const currentPeriodIndex = this.sortedPeriodDates.findIndex(
-            p => p.startAt === currentPeriod.startAt
+            p => p.startAt === currentPeriod.startAt,
           );
 
           if (this.sortedPeriodDates.length > currentPeriodIndex) {
@@ -1546,13 +1546,13 @@ export default {
             ) {
               return this.substractDays(
                 currentPeriod.endAt,
-                currentPeriod.minimumDurationNights
+                currentPeriod.minimumDurationNights,
               );
             }
 
             return this.substractDays(
               this.nextPeriod.startAt,
-              currentPeriod.minimumDurationNights
+              currentPeriod.minimumDurationNights,
             );
           };
 
@@ -1560,17 +1560,17 @@ export default {
 
           // Calculate dynamic minimum nights with nextPeriod
           const nextDisableDates = this.getDisableDaysOfTheNextedPeriod(
-            currentPeriod
+            currentPeriod,
           );
 
           if (
             !this.isDateBeforeOrEqual(
               this.checkIn,
-              this.lastEnableDaysOfPeriod
+              this.lastEnableDaysOfPeriod,
             ) &&
             nextPeriodIsPriority(
               currentPeriod,
-              currentPeriod.minimumDurationNights
+              currentPeriod.minimumDurationNights,
             )
           ) {
             this.dynamicNightCounts = this.nextPeriod.minimumDurationNights;
@@ -1584,16 +1584,16 @@ export default {
               nextDisableDates &&
               nextPeriodIsPriority(
                 currentPeriod,
-                currentPeriod.minimumDurationNights
+                currentPeriod.minimumDurationNights,
               )
             ) {
               let copyNextPeriodDisableDates = this.nextPeriodDisableDates;
               let nextDisableDatesFormat = nextDisableDates.map(d =>
-                this.dateFormater(d, "YYYY-MM-DD")
+                this.dateFormater(d, "YYYY-MM-DD"),
               );
 
               nextDisableDatesFormat = nextDisableDatesFormat.filter(
-                d => !copyNextPeriodDisableDates.includes(d)
+                d => !copyNextPeriodDisableDates.includes(d),
               );
 
               if (nextDisableDatesFormat.length > 0) {
@@ -1601,7 +1601,7 @@ export default {
                 copyNextPeriodDisableDates = copyNextPeriodDisableDates.flat();
 
                 this.nextPeriodDisableDates = this.sortedDates(
-                  copyNextPeriodDisableDates
+                  copyNextPeriodDisableDates,
                 );
               }
             }
@@ -1612,7 +1612,7 @@ export default {
         } else {
           const checkInWithMinimumDuration = this.addDays(
             this.checkIn,
-            this.minNightCount > 1 ? this.minNightCount - 1 : this.minNightCount
+            this.minNightCount > 1 ? this.minNightCount - 1 : this.minNightCount,
           );
 
           this.nextPeriod = getPeriod(checkInWithMinimumDuration);
@@ -1640,7 +1640,7 @@ export default {
 
       if (this.sortedPeriodDates[nextPeriodIndex]) {
         const nextPeriod = {
-          ...this.sortedPeriodDates[nextPeriodIndex]
+          ...this.sortedPeriodDates[nextPeriodIndex],
         };
         const isNightlyNextPeriod = nextPeriod.periodType === "nightly";
 
@@ -1653,7 +1653,7 @@ export default {
 
         const nextDate = this.addDays(
           this.checkIn,
-          nextPeriod.minimumDurationNights
+          nextPeriod.minimumDurationNights,
         );
         const nextStartNextPeriod = this.addDays(nextPeriod.startAt, 1);
 
@@ -1677,20 +1677,20 @@ export default {
 
       if (this.sortedPeriodDates[nextPeriodIndex]) {
         const nextPeriod = {
-          ...this.sortedPeriodDates[nextPeriodIndex]
+          ...this.sortedPeriodDates[nextPeriodIndex],
         };
         const nextDate = this.addDays(
           this.checkIn,
-          nextPeriod.minimumDurationNights
+          nextPeriod.minimumDurationNights,
         );
         const nextStartNextPeriod = this.addDays(nextPeriod.startAt, 1);
 
         this.nextPeriodDisableDates = this.getDaysArray(
           nextStartNextPeriod,
-          nextDate
+          nextDate,
         ).map(d => this.dateFormater(d, "YYYY-MM-DD"));
         this.nextPeriodDisableDates = this.sortedDates(
-          this.nextPeriodDisableDates
+          this.nextPeriodDisableDates,
         );
       }
     },
@@ -1716,11 +1716,11 @@ export default {
 
       if (this.isMobile) {
         firstDayOfLastMonth = this.months[this.months.length - 1].days.find(
-          day => day.belongsToThisMonth === true
+          day => day.belongsToThisMonth === true,
         );
       } else {
         firstDayOfLastMonth = this.months[this.activeMonthIndex + 1].days.find(
-          day => day.belongsToThisMonth === true
+          day => day.belongsToThisMonth === true,
         );
       }
 
@@ -1772,7 +1772,7 @@ export default {
 
             if (i === 0) {
               checkIncheckOutHalfDay[newDate] = {
-                checkIn: true
+                checkIn: true,
               };
             }
 
@@ -1782,18 +1782,18 @@ export default {
               this.getDayDiff(newDate, newDateIncrementOne) > 1
             ) {
               checkIncheckOutHalfDay[newDate] = {
-                checkOut: true
+                checkOut: true,
               };
               checkIncheckOutHalfDay[newDateIncrementOne] = {
-                checkIn: true
+                checkIn: true,
               };
             }
 
             if (i === newBaseHalfDayDates.length - 1) {
               checkIncheckOutHalfDay[
                 newBaseHalfDayDates[newBaseHalfDayDates.length - 1]
-              ] = {
-                checkOut: true
+                ] = {
+                checkOut: true,
               };
             }
           }
@@ -1803,10 +1803,10 @@ export default {
       } else {
         this.sortBookings.forEach(booking => {
           checkIncheckOutHalfDay[booking.checkInDate] = {
-            checkIn: true
+            checkIn: true,
           };
           checkIncheckOutHalfDay[booking.checkOutDate] = {
-            checkOut: true
+            checkOut: true,
           };
         });
       }
@@ -1834,8 +1834,8 @@ export default {
 
       this.checkIncheckOutHalfDay = checkIncheckOutHalfDay;
       this.$emit("handleCheckIncheckOutHalfDay", this.checkIncheckOutHalfDay);
-    }
-  }
+    },
+  },
 };
 </script>
 
